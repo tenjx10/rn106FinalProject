@@ -1,0 +1,234 @@
+<!-- This is my memento mori. This was mainly inspired by what
+we learned in Hinduism/Buddhism, where the hourglass
+represents our time being alive, which is slowly dwindling
+to death. Once the sand reaches the bottom of the hourglass,
+it flips over to start a new life (a cycle representing reincarnation), 
+which represents a cycle in samsara. The
+blue circle represents the atman/soul, which also follows
+a circular pattern representing the circle of life and 
+death. At the peak of the circle, the atman starts a new 
+cycle just as the hourglass starts its new cycle.
+After a certain amount of completed cycles, all of the 
+screen will turn white, which represents escaping samsara. 
+I chose the blank white screen based on what we read and 
+learned about what and where the atman goes after escaping
+samsara in the Upanishads. When Yama talks to Nachiketas, 
+he tells him that you cannot see, feel, touch, hear, 
+smell (and anything beyond that) the atman, and escaping 
+samsara means for the atman to become a part of Brahma. 
+Since you cannot see, feel, touch, hear, smell (or anything beyond that),
+I thought the best way to represent achieving samsara and 
+being a part of Brahma is with a blank screen. 
+It does not have a "cool" or exciting ending because I 
+wanted to capture how this thing, where you cannot see, 
+feel, touch, hear, smell (and anything beyond that) 
+becomes a part of Brahma, which is essentially the same 
+as the atman, and I believe a blank white screen best 
+represents that. I represented the hourglass and the soul 
+through a minimalistic style, instead of making it a very 
+stylistic hourglass because I wanted to connect the 
+simplicity of it to the idea of detaching from wants 
+and desires and living a simple life, stressed in 
+Buddhist beliefs. I coded the hourglass and soul to make 
+three cycles before achieving samsara, even though 
+there should be millions, but for the viewer's sake, 
+it is only three cycles that take approximately 87 
+seconds. When watching, even though it takes around a 
+minute and a half, it feels longer, which represents 
+the moments in life when we wish time to move faster 
+during distressing moments and moments when we think 
+time moves fast. The key here is trying to live in 
+the moment and try to enjoy it. This file contains 
+the HTML and CSS (usually they are different files, 
+but I just combined the two) the other is a short 
+javascript file.
+-->
+
+<!-- Creator: Jay Patel-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memento Mori</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="hourglass"></div>
+        <div class="soul"></div>
+    </div>
+    <div id="overlay"></div>
+    <script src="script.js"></script>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 3s;
+        }
+        * {
+            border: 0;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            min-height: 100vh;
+            background: #0c192c;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .wrapper {
+            position: relative;
+            height: 40em;
+            width: 40em;
+            font-size: 20px;
+        }
+        .wrapper .hourglass {
+            position: absolute;
+            top: 15em;
+            left: 17em;
+            box-shadow: 0 0 3em white;
+        }
+        .wrapper .soul{
+            position: absolute;
+            border-style: solid;
+            border-color: rgba(36, 55, 61, 0.278) transparent transparent transparent;
+            border-width: 0.5em 0.5em 0 0;
+            border-radius: 50%;
+            animation: changeColor 10s forwards;
+        }
+        .wrapper .soul{
+            width: 30em;
+            height: 30em;
+            top: 5em;
+            left: 5em;
+            animation: anim 30.5s linear infinite;
+        }
+        @keyframes changeColor {
+            to {
+                background: white;
+            }
+        }
+        @keyframes anim {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        .wrapper .soul::before {
+            position: absolute;
+            content: "";
+            border-radius: 50%;
+            height: 3em;
+            width: 3em;
+            background-color: rgba(12, 230, 250, 0.736);
+            box-shadow: 0 0 3em white;
+            top: 2.8em;
+            right: 2.8em;
+        }
+        :root {
+            --bg: #e3e4e8;
+            --fg: #d8d50a;
+            --primary: #6a3404;
+            font-size: calc(16px + (24 - 16) * (100vw - 320px) / (1280 - 320));
+        }
+        .hourglass, .hourglass:before, .hourglass:after {
+            animation-duration: 29.5s;
+            animation-iteration-count: infinite;
+        }
+        .hourglass {
+            --polygonH: polygon(0% 0%,100% 0%,100% 5.55%,95% 5.55%,95% 28%,60% 46%,60% 54%,95% 72%,95% 94.45%,100% 94.45%,100% 100%,0% 100%,0% 94.45%,5% 94.45%,5% 72%,40% 54%,40% 46%,5% 28%,5% 5.55%,0% 5.55%);
+            animation-name: flip;
+            animation-timing-function: ease-in-out;
+            background-image: linear-gradient(var(--primary) 0.5em,#737a8c55 0.5em 8.5em,var(--primary) 8.5em);
+            clip-path: var(--polygonH);
+            -webkit-clip-path: var(--polygonH);
+            overflow: hidden;
+            position: relative;
+            width: 5em;
+            height: 9em;
+            z-index: 0;
+        }
+        .hourglass:before, .hourglass:after {
+            animation-timing-function: linear;
+            content: "";
+            display: block;
+            position: absolute;
+        }
+        .hourglass:before {
+            --polygonB1: polygon(0% 0%,100% 0%,100% 24%,50% 47%,50% 47%,50% 47%,50% 47%,50% 47%,50% 47%,50% 47%,50% 47%,0% 24%);
+            --polygonB2: polygon(0% 4%,100% 4%,100% 24%,55% 45%,55% 100%,55% 100%,55% 100%,45% 100%,45% 100%,45% 100%,45% 45%,0% 24%);
+            --polygonB3: polygon(0% 24%,100% 24%,100% 24%,55% 45%,55% 80%,100% 100%,100% 100%,0% 100%,0% 100%,45% 80%,45% 45%,0% 24%);
+            --polygonB4: polygon(45% 45%,55% 45%,55% 45%,55% 45%,55% 58%,100% 76%,100% 100%,0% 100%,0% 76%,45% 58%,45% 45%,45% 45%);
+            --polygonB5: polygon(50% 53%,50% 53%,50% 53%,50% 53%,50% 53%,100% 76%,100% 100%,0% 100%,0% 76%,50% 53%,50% 53%,50% 53%);
+            animation-name: fill;
+            background-color: var(--fg);
+            background-size: 100% 3.6em;
+            clip-path: var(--polygonB1);
+            -webkit-clip-path: var(--polygonB1);
+            top: 0.5em;
+            left: 0.5em;
+            width: 4em;
+            height: 8em;
+            z-index: 1;
+        }
+        .hourglass:after {
+            background:
+                linear-gradient(90deg,#0000 0.5em,#0000 1.5em 3.5em,#fff0 4.5em 6.5em,#0000 7.5em) 0 0 / 100% 0.5em,
+                linear-gradient(90deg,#0000 0.75em,#0000 1.25em 3.75em,#fff0 4.25em 6.75em,#0000 7.25em) 0 0.5em / 100% 8em,
+                linear-gradient(90deg,#0000 0.5em,#0000 1.5em 3.5em,#fff0 4.5em 6.5em,#0000 7.5em) 0 100% / 100% 0.5em;
+            background-repeat: repeat-x;
+            top: 0;
+            left: -3em;
+            width: 200%;
+            height: 100%;
+            z-index: 2;
+        }
+        @keyframes fill {
+            from {
+                clip-path: var(--polygonB1);
+                -webkit-clip-path: var(--polygonB1);
+            }
+            10% {
+                clip-path: var(--polygonB2);
+                -webkit-clip-path: var(--polygonB2);
+            }
+            45% {
+                clip-path: var(--polygonB3);
+                -webkit-clip-path: var(--polygonB3);
+            }
+            80% {
+                clip-path: var(--polygonB4);
+                -webkit-clip-path: var(--polygonB4);
+            }
+            85%, to {
+                clip-path: var(--polygonB5);
+                -webkit-clip-path: var(--polygonB5);
+            }
+        }
+        @keyframes flip {
+            from, 90% {
+                transform: rotate(0);
+            }
+            to {
+                transform: rotate(180deg);
+            }
+        }
+    </style>
+</body>
+</html>
